@@ -141,9 +141,9 @@ for i in range(1,280):
 			nodata.append(i)
 		else:
 			remaining_feature.append(i)
-#print(nodata)   #####-------------------uncomment this command to print the truncated feature number
+print(nodata)   #####-------------------uncomment this command to print the truncated feature number
 #print(len(nodata))
-print(remaining_feature)   #####-------------------uncomment this to print the remaining feature number
+#print(remaining_feature)   #####-------------------uncomment this to print the remaining feature number
 
 #####-------------------The above print command will print the number of features
 #####-------------------do not change very much at all and should be stripped off.
@@ -154,13 +154,16 @@ print(remaining_feature)   #####-------------------uncomment this to print the r
 #####-------------------The next code snippet will carry out the task of creating a new
 #####-------------------text file integrating all the feature values and truncating all
 #####-------------------missing values and mundanely repetitive feature values
-
+ 
 row=0
+nocolumn=[15,30,32,36,49,50,53,55,56,57,61,63,64,68,99,142,151]
 for d in c:
 	row+=1
-	if row in existdata:
+	norow=[142,317,593,768]
+	if (row in existdata) and (row not in norow):
 		e=d.split(",")
 		column=0
+		l=0
 		for k in e:
 			column+=1
 			if column not in nodata:
@@ -171,7 +174,11 @@ for d in c:
 				elif column==280:
 					newfile.write(e[column-1])
 				else:
-					newfile.write(e[column-1]+",")
+					if l in nocolumn:
+						l=l+1
+					else:
+						newfile.write(e[column-1]+",")
+						l+=1
 		newfile.write("\n")
 newfile.close()
 datafile.close()
