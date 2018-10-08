@@ -78,8 +78,8 @@ for i in feature_dict.keys():
 for i in j:
 	del feature_dict[i]  ###---deleting feature instances if found number of instances less than the threshold
 
-#print(feature_dict)
-
+print(feature_dict)
+ 
 
 #####-------------------The above print command will print the following:
 #####-------------------{'Sinus Bradycardy': 50,
@@ -164,7 +164,11 @@ for d in c:
 		for k in e:
 			column+=1
 			if column not in nodata:
-				if column==280:
+				if column==280 and int(e[column-1])==10:
+					newfile.write(str(7))
+				elif column==280 and int(e[column-1])==16:
+					newfile.write(str(8))
+				elif column==280:
 					newfile.write(e[column-1])
 				else:
 					newfile.write(e[column-1]+",")
@@ -185,3 +189,9 @@ datafile.close()
 #####-------------------ECG values,amplitude of JJ wave, R wave, S wave,
 #####-------------------P wave, T wave, QRSA shape value, QRSTA and various 
 #####-------------------channel values for ECG monitoring
+
+
+#####-------------------1:Normal, 2: Isochemic changes, 3:old Anterior Myocardiac 
+#####-------------------infraction, 4: old inferior myocardiac infraction, 5: sinus
+#####-------------------tachycardy, 6: sinus bradycardy, 7: Right bundle branch
+#####-------------------block, 8.others
